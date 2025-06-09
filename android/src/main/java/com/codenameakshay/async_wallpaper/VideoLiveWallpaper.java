@@ -30,14 +30,10 @@ public class VideoLiveWallpaper extends WallpaperService {
 
     public static void setToWallPaper(Context context) {
         final Intent intent = new Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, new ComponentName(context, VideoLiveWallpaper.class));
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+                        new ComponentName(context.getPackageName(), "com.codenameakshay.async_wallpaper.VideoLiveWallpaper"));
         context.startActivity(intent);
-        try {
-            WallpaperManager.getInstance(context).clear();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void openWallpaperChooser(Context context) {
